@@ -1,0 +1,35 @@
+{
+  "packageManager": "yarn@4.5.1",
+  "version": "0.1.0",
+  "engines": {
+    "yarn": ">=4",
+    "node": ">=22"
+  },
+  "private": true,
+  "devDependencies": {
+    "@bufbuild/buf": "^1.46.0",
+    "@bufbuild/protobuf": "^2.2.2",
+    "@commitlint/cli": "19.5.0",
+    "@commitlint/config-conventional": "19.5.0",
+    "commitizen": "^4.3.1",
+    "commitlint": "19.5.0",
+    "concurrently": "^9.1.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^9.1.6",
+    "rimraf": "^6.0.1"
+  },
+  "scripts": {
+    "postinstall": "husky",
+    "lint:fix": "./gradlew spotlessApply",
+    "lint": "buf lint && ./gradlew check",
+    "test": "./gradlew test nativeTest",
+    "test:coverage": "./gradlew testCodeCoverageReport",
+    "upgrade": "yarn upgrade-interactive && rimraf '.yarn/cache' 'node_modules/' 'yarn.lock' && yarn && yarn upgrade:java",
+    "upgrade:java": "./gradlew dependencyUpdates"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
